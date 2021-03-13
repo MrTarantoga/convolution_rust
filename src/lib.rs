@@ -1,4 +1,3 @@
-#[warn(dead_code)]
 mod convolution {
     use std::iter::Sum;
     use std::ops::{Add, Div, Mul, Sub};
@@ -8,7 +7,9 @@ mod convolution {
         function_b: Vec<T>,
         state: usize
     }
+
     impl<T> DataSet<T> where T: Add + Sub + Mul + Div + Clone {
+        #[allow(dead_code)]
         pub fn new(function_a: &[T], function_b: &[T]) -> DataSet<T> {
             DataSet {
                 function_a: function_a.to_vec(),
@@ -106,6 +107,6 @@ mod tests {
             &[1.5, -9.88, 13.9],
 
         );
-        print!("{:?}\n", obj.next());
+        assert_eq!(Some(2.25), obj.next());
     }
 }
